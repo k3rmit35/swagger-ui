@@ -30,8 +30,8 @@ fi
 replace_in_index myApiKeyXXXX123456789 $API_KEY
 
 if [[ -f $SWAGGER_JSON ]]; then
-  cp -s $SWAGGER_JSON $NGINX_ROOT
-  REL_PATH="./$(basename $SWAGGER_JSON)"
+   cd $NGINX_ROOT ; ln -s $(dirname $SWAGGER_JSON)/* .
+   REL_PATH="./$(basename $SWAGGER_JSON)"
   sed -i "s|https://petstore.swagger.io/v2/swagger.json|$REL_PATH|g" $INDEX_FILE
   sed -i "s|http://example.com/api|$REL_PATH|g" $INDEX_FILE
 fi
